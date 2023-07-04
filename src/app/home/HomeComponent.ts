@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MakeupService } from '../services/makeup.service';
 
+
 @Component({
-  selector: 'app-products-list',
-  templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class ProductsListComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   products: any[] | undefined;
-  carregando: boolean = false;
 
   constructor(private api: MakeupService) {
   }
@@ -18,12 +18,19 @@ export class ProductsListComponent implements OnInit {
   }
 
   GetProducts() {
-    this.carregando = true;
     this.api.getProducts().subscribe((response => {
       this.products = response as any[];
-      this.carregando = false;
-      console.log(this.products)
+
+
+      const products = response as any[];
+
+      console.log("RESPOSTA API: ", products[0]);
+
+      // products.forEach(product => {
+      //   console.log("Nome do produto:", product.name);
+      //});
     }));
 
   }
+
 }
